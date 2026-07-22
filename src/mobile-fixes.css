@@ -16,14 +16,14 @@
 
 @media (max-width: 480px) {
   .cover {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 22px;
+    padding-right: 22px;
   }
 
   .cover h1 {
     max-width: 100%;
-    font-size: 32px;
-    line-height: 1;
+    font-size: 28px;
+    line-height: 1.05;
     letter-spacing: 0;
   }
 
