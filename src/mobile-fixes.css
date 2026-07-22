@@ -3,6 +3,10 @@
   letter-spacing: 0;
 }
 
+.resume[hidden] {
+  display: none;
+}
+
 @media (max-width: 860px) {
   .contents {
     transform: translateX(calc(-100% - 12px));
