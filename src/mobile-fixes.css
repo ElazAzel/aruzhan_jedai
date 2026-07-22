@@ -1,3 +1,8 @@
+.cover h1 {
+  font-size: clamp(40px, 5vw, 76px);
+  letter-spacing: 0;
+}
+
 @media (max-width: 860px) {
   .contents {
     transform: translateX(calc(-100% - 12px));
