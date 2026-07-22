@@ -1,0 +1,33 @@
+@media (max-width: 860px) {
+  .contents {
+    transform: translateX(calc(-100% - 12px));
+    box-shadow: none;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .contents.is-open {
+    transform: none;
+    box-shadow: 5px 0 0 #171716;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .cover {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .cover h1 {
+    max-width: 100%;
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  .cover-subtitle {
+    max-width: 315px;
+  }
+}

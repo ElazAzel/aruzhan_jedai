@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import guide from '../content/guide.md?raw'
 import './App.css'
+import './mobile-fixes.css'
 
 const AUTHOR_URL = 'https://instagram.com/aruzhan_jedai/'
 const sectionNames = ['Введение', 'Инновационный двигатель', 'Воображение', 'Внимание', 'Мышление ресурсами', 'Среда', 'Культура эксперимента', '10 упражнений', '7-дневный челлендж']
