@@ -1,6 +1,65 @@
 .cover h1 {
-  font-size: clamp(40px, 5vw, 76px);
+  font-size: clamp(36px, 3.7vw, 56px);
   letter-spacing: 0;
+}
+
+.cover-copy {
+  position: relative;
+  z-index: 2;
+  max-width: min(50vw, 640px);
+}
+
+.cover-art {
+  position: absolute;
+  inset: 52px 0 0 auto;
+  width: min(42vw, 560px);
+  height: calc(100% - 52px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.cover-photo {
+  position: absolute;
+  right: clamp(16px, 2.5vw, 40px);
+  bottom: 0;
+  width: min(24vw, 330px);
+  max-height: min(82vh, 760px);
+  aspect-ratio: 640 / 1136;
+  object-fit: cover;
+  object-position: 52% 38%;
+  border: 1px solid #171716;
+  box-shadow: 10px 10px 0 #171716;
+}
+
+.cover-logo {
+  position: absolute;
+  object-fit: contain;
+  user-select: none;
+}
+
+.cover-logo-light {
+  right: -6vw;
+  top: 6vh;
+  width: min(52vw, 680px);
+  opacity: .38;
+  mix-blend-mode: screen;
+}
+
+.cover-logo-dark {
+  right: clamp(16px, 2.5vw, 40px);
+  bottom: clamp(22px, 4vh, 42px);
+  width: min(20vw, 250px);
+  background: #f7f3e9;
+  border: 1px solid #171716;
+  padding: 10px 12px;
+}
+
+.author-logo {
+  width: min(240px, 58vw);
+  height: auto;
+  display: block;
+  margin-bottom: 34px;
+  filter: brightness(0);
 }
 
 .resume[hidden] {
@@ -21,6 +80,36 @@
     visibility: visible;
     pointer-events: auto;
   }
+
+  .cover-copy {
+    max-width: 100%;
+  }
+
+  .cover-art {
+    inset: 52px 0 0;
+    width: 100%;
+    height: calc(100% - 52px);
+  }
+
+  .cover-photo {
+    right: 18px;
+    bottom: 30px;
+    width: min(42vw, 178px);
+    max-height: 38vh;
+    opacity: .92;
+    box-shadow: 6px 6px 0 #171716;
+  }
+
+  .cover-logo-light {
+    right: -46vw;
+    top: 6vh;
+    width: 120vw;
+    opacity: .2;
+  }
+
+  .cover-logo-dark {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -37,7 +126,17 @@
   }
 
   .cover-subtitle {
-    max-width: 315px;
+    max-width: 255px;
+  }
+
+  .start {
+    margin-top: 34px;
+  }
+
+  .cover-photo {
+    right: 18px;
+    width: 152px;
+    max-height: 34vh;
   }
 }
 
