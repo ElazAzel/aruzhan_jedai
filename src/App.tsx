@@ -20,7 +20,7 @@ function inline(value: string) {
 }
 
 function slugFor(text: string) {
-  const value = text.replace(/[\*\\.«»]/g, '').toLowerCase()
+  const value = text.replace(/[*\\.«»]/g, '').toLowerCase()
   if (value.includes('гайд')) return 'intro'
   if (value.includes('введение')) return 'intro'
   if (value.includes('инновационный двигатель')) return 'engine'
@@ -45,11 +45,27 @@ function App() {
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY + 180
-      const found = [...sectionIds].reverse().find((id) => document.getElementById(id)?.offsetTop! <= y) || 'intro'
+      const found = [...sectionIds].reverse().find((id) => (document.getElementById(id)?.offsetTop ?? Number.POSITIVE_INFINITY) <= y) || 'intro'
       setActive(found)
       setProgress((p) => p.lastSection === found ? p : { ...p, lastSection: found })
     }
     onScroll(); window.addEventListener('scroll', onScroll, { passive: true }); return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+  useEffect(() => {
+    const targets = document.querySelectorAll('.guide-section, .exercise-title, .day, .engine-image, .author')
+    targets.forEach((target) => target.classList.add('will-reveal'))
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 })
+
+    targets.forEach((target) => observer.observe(target))
+    return () => observer.disconnect()
   }, [])
 
   const completed = useMemo(() => Object.values(progress.done).filter(Boolean).length + Object.values(progress.days).filter(Boolean).length, [progress])
