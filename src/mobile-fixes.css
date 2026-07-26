@@ -931,6 +931,8 @@
 }
 
 .engine-image img { border: 0; }
+.engine-image { scroll-margin-top: 84px; }
+.topic-heading { scroll-margin-top: 84px; }
 
 /* Hero: one clear story — title, author, then brand. */
 .cover {

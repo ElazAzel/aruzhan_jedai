@@ -91,10 +91,10 @@ function App() {
         const match = text.match(/\*\*(\d+)\\?\.\s*/)
         if (match) { exercise = Number(match[1]); return <ExerciseTitle key={index} number={exercise} title={text} progress={progress} onToggle={toggle} onNote={updateNote} /> }
         topic += 1
-        return <div className="topic-heading" key={index}><span>{String(topic).padStart(2, '0')}</span><h3>{inline(text)}</h3></div>
+        return <div id={topic === 1 ? 'intro' : undefined} className="topic-heading" key={index}><span>{String(topic).padStart(2, '0')}</span><h3>{inline(text)}</h3></div>
       }
       if (raw.startsWith('### ')) return <h4 key={index} className="content-subtitle">{inline(raw.slice(4).trim())}</h4>
-      if (raw.includes('![][image1]')) return <figure className="engine-image" key={index}><img src="/assets/innovation-engine.png" alt="Схема Innovation Engine — инновационного двигателя" /></figure>
+      if (raw.includes('![][image1]')) return <figure id="engine" className="engine-image" key={index}><img src="/assets/innovation-engine.png" alt="Схема Innovation Engine — инновационного двигателя" /></figure>
       const day = raw.match(/\*\*День (\d+):\*\*\s*(.*)/)
       if (day) {
         const key = `day-${day[1]}`
@@ -113,7 +113,7 @@ function App() {
     <header className="topbar"><button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="contents">Содержание <span>+</span></button><div className="reading"><i style={{ width: `${Math.min(100, Math.round((window.scrollY / Math.max(1, document.body.scrollHeight - innerHeight)) * 100))}%` }} /></div><button className="reset" onClick={() => setResetOpen(true)}>Сбросить</button></header>
     <nav id="contents" className={menuOpen ? 'contents is-open' : 'contents'} aria-label="Оглавление">{sectionNames.map((name, i) => <button className={active === sectionIds[i] ? 'active' : ''} onClick={() => go(sectionIds[i])} key={name}><small>0{i + 1}</small>{name}</button>)}</nav>
     <main>
-      <section className="cover" aria-labelledby="guide-title"><div className="cover-art"><img className="cover-photo" src="/assets/author-cover.jpg" alt="Аружан Каримова" /><img className="cover-logo cover-logo-light" src="/assets/jedai-logo-light.png" alt="" aria-hidden="true" /><img className="cover-logo cover-logo-dark" src="/assets/jedai-logo-dark.png" alt="JEDAI" /></div><div className="cover-copy"><div className="cover-mark">✳</div><p className="eyebrow">ПРАКТИЧЕСКИЙ ГАЙД</p><h1 id="guide-title">«ИННОВАЦИОННЫЙ<br />ДВИГАТЕЛЬ»</h1><p className="cover-subtitle">Практическая система развития креативного мышления</p><button className="start" onClick={() => go('intro')}>Начать <span>↓</span></button></div><div className="cover-shape one" /><div className="cover-shape two" /></section>
+      <section className="cover" aria-labelledby="guide-title"><div className="cover-art"><img className="cover-photo" src="/assets/author-cover.jpg" alt="Аружан Каримова" /><img className="cover-logo cover-logo-light" src="/assets/jedai-logo-light.png" alt="" aria-hidden="true" /><img className="cover-logo cover-logo-dark" src="/assets/jedai-logo-dark.png" alt="JEDAI" /></div><div className="cover-copy"><div className="cover-mark">✳</div><p className="eyebrow">ПРАКТИЧЕСКИЙ ГАЙД</p><h1 id="guide-title">«ИННОВАЦИОННЫЙ<br />ДВИГАТЕЛЬ»</h1><p className="cover-subtitle">Практическая система развития креативного мышления</p><button className="start" onClick={() => go('engine')}>Начать <span>↓</span></button></div><div className="cover-shape one" /><div className="cover-shape two" /></section>
       <aside className="resume" hidden={!progress.lastSection || progress.lastSection === 'intro'}><span>Мой прогресс · {completed} выполнено</span><button onClick={() => go(progress.lastSection!)}>Продолжить</button></aside>
       <article className="guide">{renderGuide()}</article>
       <footer className="author"><img className="author-logo" src="/assets/jedai-logo-dark.png" alt="JEDAI" /><p>Автор</p><a href={AUTHOR_URL} target="_blank" rel="noreferrer" onClick={() => {}}><span>Аружан<br />Каримова</span><b>Instagram автора ↗</b></a></footer>
