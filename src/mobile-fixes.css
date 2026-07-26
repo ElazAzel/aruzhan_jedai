@@ -1057,7 +1057,7 @@
 }
 
 .cover-shape.two {
-  right: -48px;
+  right: 0;
   bottom: auto;
   top: 9%;
   width: min(18vw, 250px);
@@ -1069,63 +1069,58 @@
 
 @media (max-width: 860px) {
   .cover {
-    min-height: 790px;
-    padding: 98px 22px 48px;
+    min-height: 650px;
+    padding: 82px 22px 34px;
     background-size: 30px 30px;
   }
 
-  .cover::before { background: linear-gradient(180deg, transparent 0 59%, rgba(255, 223, 33, .8) 59% 100%); }
+  .cover::before { background: linear-gradient(180deg, transparent 0 66%, rgba(255, 223, 33, .8) 66% 100%); }
   .cover-copy { width: 100%; }
-  .cover-mark { width: 47px; height: 47px; margin-bottom: 20px; font-size: 38px; }
+  .cover-mark { width: 47px; height: 47px; margin-bottom: 15px; font-size: 38px; }
   .eyebrow { margin-bottom: 14px; }
-  .cover h1 { max-width: 100%; font-size: 30px; letter-spacing: -.12em; margin-bottom: 18px; }
+  .cover h1 { max-width: 100%; margin-top: 188px; font-size: 28px; letter-spacing: -.12em; margin-bottom: 16px; }
   .cover-subtitle { max-width: 284px; font-size: 16px; }
-  .start { margin-top: 26px; }
+  .start { margin-top: 24px; }
 
   .cover-art {
-    inset: auto 18px 32px auto;
-    width: min(48vw, 202px);
-    height: 390px;
+    inset: 78px 22px auto auto;
+    width: 164px;
+    height: 290px;
   }
 
   .cover-art::before {
-    top: 41px;
-    right: -10px;
-    width: min(47vw, 190px);
+    top: 42px;
+    right: -18px;
+    width: 182px;
   }
 
   .cover-art::after {
     right: 0;
-    bottom: 0;
-    width: min(44vw, 180px);
-    height: 315px;
+    bottom: auto;
+    top: 0;
+    width: 164px;
+    height: 290px;
     transform: translate(7px, 7px);
   }
 
   .cover-photo {
     right: 0;
-    bottom: 0;
-    width: min(44vw, 180px);
-    max-height: 315px;
+    bottom: auto;
+    top: 0;
+    width: 164px;
+    height: 290px;
+    max-height: none;
     box-shadow: 7px 7px 0 #171716;
   }
 
-  .cover-logo-dark {
-    left: -29px;
-    bottom: 17px;
-    width: min(35vw, 142px);
-    padding: 6px 7px;
-    box-shadow: 3px 3px 0 #171716;
-  }
-
-  .cover-shape.one { right: 44%; bottom: -48px; width: 112px; height: 112px; border-width: 8px; }
-  .cover-shape.two { right: -15px; top: 33%; width: 132px; height: 132px; }
+  .cover-shape.one,
+  .cover-shape.two { display: none; }
 }
 
 @media (max-width: 380px) {
-  .cover { min-height: 740px; }
-  .cover h1 { font-size: 29px; max-width: 100%; }
-  .cover-art { width: 45vw; height: 345px; }
-  .cover-photo { width: 42vw; max-height: 282px; }
-  .cover-art::after { width: 42vw; height: 282px; }
+  .cover { min-height: 630px; }
+  .cover h1 { margin-top: 176px; font-size: 27px; max-width: 100%; }
+  .cover-art { right: 18px; width: 150px; height: 266px; }
+  .cover-photo { width: 150px; height: 266px; }
+  .cover-art::after { width: 150px; height: 266px; }
 }
