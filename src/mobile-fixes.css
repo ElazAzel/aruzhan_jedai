@@ -929,3 +929,5 @@
   .engine-card,
   .engine-orbit span:nth-child(n) { animation: none !important; }
 }
+
+.engine-image img { border: 0; }
