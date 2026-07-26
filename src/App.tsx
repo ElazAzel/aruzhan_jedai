@@ -74,8 +74,11 @@ function App() {
   const go = (id: string) => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); setMenuOpen(false) }
 
   const renderGuide = () => {
-    const lines = guide.replace(/\r/g, '').split('\n')
+    const sourceLines = guide.replace(/\r/g, '').split('\n')
+    const firstContentLine = sourceLines.findIndex((line) => line.startsWith('## '))
+    const lines = sourceLines.slice(firstContentLine === -1 ? 0 : firstContentLine)
     let exercise = 0
+    let topic = 0
     return lines.map((raw, index) => {
       if (!raw || raw.startsWith('[image1]:')) return null
       if (raw === '---') return <div className="rule" key={index} aria-hidden="true" />
@@ -87,16 +90,21 @@ function App() {
         const text = raw.slice(3).trim()
         const match = text.match(/\*\*(\d+)\\?\.\s*/)
         if (match) { exercise = Number(match[1]); return <ExerciseTitle key={index} number={exercise} title={text} progress={progress} onToggle={toggle} onNote={updateNote} /> }
-        return <h3 key={index}>{inline(text)}</h3>
+        topic += 1
+        return <div className="topic-heading" key={index}><span>{String(topic).padStart(2, '0')}</span><h3>{inline(text)}</h3></div>
       }
-      if (raw.startsWith('### ')) return <h4 key={index}>{inline(raw.slice(4).trim())}</h4>
+      if (raw.startsWith('### ')) return <h4 key={index} className="content-subtitle">{inline(raw.slice(4).trim())}</h4>
       if (raw.includes('![][image1]')) return <figure className="engine-image" key={index}><img src="/assets/innovation-engine.png" alt="Схема Innovation Engine — инновационного двигателя" /></figure>
       const day = raw.match(/\*\*День (\d+):\*\*\s*(.*)/)
       if (day) {
         const key = `day-${day[1]}`
         return <label className={`day ${progress.days[key] ? 'is-done' : ''}`} key={index}><input type="checkbox" checked={!!progress.days[key]} onChange={() => toggle('days', key)} /><span><b>День {day[1]}:</b> {day[2]}</span><textarea aria-label={`Заметка, день ${day[1]}`} placeholder="Заметка" value={progress.notes[key] || ''} onChange={(e) => updateNote(key, e.target.value)} /></label>
       }
-      return <p key={index} className={raw.trim().startsWith('—') || raw.trim().startsWith('→') ? 'list-line' : ''}>{inline(raw.trim())}</p>
+      const value = raw.trim()
+      const isList = value.startsWith('—') || value.startsWith('→')
+      const isQuote = value.startsWith('«') || value.startsWith('**«') || value.startsWith('→')
+      const isPractice = value.startsWith('**Практика') || value.startsWith('**Главное')
+      return <p key={index} className={`${isList ? 'list-line' : ''} ${isQuote ? 'quote-line' : ''} ${isPractice ? 'practice-line' : ''}`}>{inline(value)}</p>
     })
   }
 
